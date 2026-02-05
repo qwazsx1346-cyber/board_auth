@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: board-auth
+  datasource: # 데이터베이스 접속정보
+    url: jdbc:log4jdbc:mysql://localhost:3306/board_auth
+    username: root
+    password: green502
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+mybatis: # Mybatis 세팅
+    configuration:
+      map-underscore-to-camel-case: true
+    mapper-locations: mappers/**/*.xml # xml파일 위치 /  mappers폴더 아래에/어떤 폴더가있어도 상관없고 / .xml로 끝나는 모든 파일
