@@ -1,3 +1,23 @@
+constants: # 커스텀 속성
+  jwt:
+    issuer: green502@green.com # JWT 토큰 발행자 정보
+    bearer-format: JWT
+
+    claim-key: signedUser
+    secret-key: DeaguGreenArtAcademyClass502MsaClassFighting # 비밀 레시피(절대 공개되어서는 안 된다)
+
+    access-token-cookie-name: access-token
+    access-token-cookie-path: /
+    access-token-cookie-validity-seconds: 900 #15분 (초로 했을 때)
+    access-token-validity-milliseconds: 900_000 #15분 (밀리 세컨드로 했을 때)
+
+    refresh-token-cookie-name: refresh-token
+    refresh-token-cookie-path: /api/user/reissue
+    refresh-token-cookie-validity-seconds: 1_296_000 #15일 (초로 했을 때)
+    refresh-token-validity-milliseconds: 1_296_000_000 #15일 (밀리 세컨드로 했을 때)
+    #초단위는 cookie에 넣는방식, 밀리 세컨드는 JWT에 넣는방식
+
+
 spring:
   application:
     name: board-auth
