@@ -29,6 +29,7 @@ public class UserController {
         return new ResultResponse<>("회원가입 성공", result);
     }
 
+
     @PostMapping("/signin")
     public ResultResponse<?> singIn(HttpServletResponse res, @RequestBody UserSignInReq req) {
         log.info("req: {} ", req);
