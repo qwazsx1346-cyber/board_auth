@@ -3,6 +3,7 @@ package com.green.boardauth.configuration.security;
 import com.green.boardauth.configuration.constants.ConstJwt;
 import com.green.boardauth.configuration.model.JwtUser;
 import com.green.boardauth.configuration.util.MyCookieUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,5 +50,10 @@ public class JwtTokenManager { //인증 처리 총괄
                             , constJwt.getRefreshTokenCookieValiditySeconds()
                             , constJwt.getRefreshTokenCookiePath()
       );
+    }
+
+    //AT를 쿠키에서 꺼낸다.
+    public String getAccessTokenFromCookie(HttpServletRequest req) {
+        return null;
     }
 }
