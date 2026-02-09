@@ -12,29 +12,29 @@ public class UserDummy extends Dummy {
 
     @Test
     void generate() {
-      SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
-      UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-      for(int i=1; i<=ADD_ROW_COUNT; i++) {
-          String uid = String.format("mic%04d", i);
-          System.out.printf("uid: %s\n", uid);
+        for(int i=1; i<=ADD_ROW_COUNT; i++) {
+            String uid = String.format("mic%04d", i);
+            System.out.printf("uid: %s\n", uid);
 
-          String nm = koFaker.name().lastName() + koFaker.name().firstName();
-          System.out.printf("nm: %s\n", nm);
+            String nm = koFaker.name().lastName() + koFaker.name().firstName();
+            System.out.printf("nm: %s\n", nm);
 
-          String pw = "$2a$10$PdihkApucpvnoU3681i7Sux5epL1YWPYcokkSQDbKHePPt/pjjDSe"; //1212
+            String pw = "$2a$10$PdihkApucpvnoU3681i7Sux5epL1YWPYcokkSQDbKHePPt/pjjDSe"; //1212
 
-          int gender = koFaker.random().nextInt(1, 2);
-          System.out.printf("gender: %d\n", gender);
+            int gender = koFaker.random().nextInt(1, 2);
+            System.out.printf("gender: %d\n", gender);
 
-          UserSignUpReq userSignUpReq = new UserSignUpReq();
-          userSignUpReq.setUid(uid);
-          userSignUpReq.setUpw(pw);
-          userSignUpReq.setNm(nm);
-          userSignUpReq.setGender(gender);
+            UserSignUpReq userSignUpReq = new UserSignUpReq();
+            userSignUpReq.setUid(uid);
+            userSignUpReq.setUpw(pw);
+            userSignUpReq.setNm(nm);
+            userSignUpReq.setGender(gender);
 
-          userMapper.signUp(userSignUpReq);
+            userMapper.signUp(userSignUpReq);
+        }
+        sqlSession.flushStatements();
       }
-      sqlSession.flushStatements();
-    }
 }
