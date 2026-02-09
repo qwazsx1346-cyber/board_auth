@@ -42,4 +42,10 @@ public class UserController {
 
         return new ResultResponse<>(userSignInRes == null ? "로그인 실패" : "로그인 성공", userSignInRes);
     }
+
+    @PostMapping("/signout")
+    public ResultResponse<?> signOut(HttpServletResponse res) {
+            jwtTokenManager.signOut(res);
+            return new ResultResponse<>("로그아웃 성공", 1);
+    }
 }
