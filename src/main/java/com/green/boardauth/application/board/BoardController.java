@@ -1,6 +1,8 @@
 package com.green.boardauth.application.board;
 
+import com.green.boardauth.application.board.model.BoardGetMaxPageReq;
 import com.green.boardauth.application.board.model.BoardGetReq;
+import com.green.boardauth.application.board.model.BoardGetRes;
 import com.green.boardauth.application.board.model.BoardPostReq;
 import com.green.boardauth.configuration.model.ResultResponse;
 import com.green.boardauth.configuration.model.UserPrincipal;
@@ -8,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -31,6 +35,14 @@ public class BoardController {
     @GetMapping
     public ResultResponse<?> getBoardList(@ModelAttribute BoardGetReq req) {
         log.info("req: {}", req);
-        return null;
+        List<BoardGetRes> list = boardService.getBoardList(req);
+        return new ResultResponse<>(String.format("%d rows,", list.size()), list);
+    }
+
+    @GetMapping("/max_page")
+    public ResultResponse<?> getBoardMaxPage(@ModelAttribute BoardGetMaxPageReq req) {
+        log.info("req: {}", req);
+        int maxPage = boardService.getBoardMaxPage(req);
+        return new ResultResponse<>( String.format("maxPage: %d", maxPage), maxPage );
     }
 }
