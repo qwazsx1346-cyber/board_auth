@@ -29,4 +29,11 @@
             OR contents LIKE '%${searchText}%';
         </if>
     </select>
+    <select id="boardDetail">
+        SELECT b.id, b.title, b.contents, b.created_at, u.nm, b.user_id
+        FROM board b
+        JOIN user u
+        ON u.id = b.user_id
+        WHERE b.id = #{id}
+    </select>
 </mapper>
