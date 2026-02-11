@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.boardauth.application.board.BoardMapper">
-    <insert id="save">
+    <!-- useGeneratedKeys: insert하고 바로 pk값 가져오는 기능
+        keyProperty: pk값을 담을 멤버 필드명
+    -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO board
             SET title = #{title},
                 contents = #{contents},
                 user_id = #{userId}
     </insert>
+
     <select id="findAll">
         SELECT b.id, b.title, b.created_at, u.nm
         FROM board b
@@ -22,6 +26,7 @@
         ORDER BY b.id DESC
         LIMIT #{startIdx}, #{size};
     </select>
+
     <select id="findMaxPage">
         SELECT  CEIL( COUNT(1) / #{size} ) FROM board
         <if test="searchText != null and searchText != '' ">
@@ -29,6 +34,7 @@
             OR contents LIKE '%${searchText}%';
         </if>
     </select>
+
     <select id="boardDetail">
         SELECT b.id, b.title, b.contents, b.created_at, u.nm, b.user_id
         FROM board b
@@ -36,4 +42,19 @@
         ON u.id = b.user_id
         WHERE b.id = #{id}
     </select>
+
+    <update id="modify">
+        UPDATE board
+        SET title = #{title},
+            contents = #{contents}
+        WHERE id = #{id}
+        AND user_id = #{userId}
+    </update>
+
+    <delete id="delList">
+        DELETE
+        FROM board
+        WHERE id = #{id}
+        AND user_id = #{signedUserId} <!-- 얘가 있어야 나만 삭제할 수 있다. 얘가없으면 로그인만 하면 남의 게시물을 다 삭제할 수 있다.-->
+    </delete>
 </mapper>

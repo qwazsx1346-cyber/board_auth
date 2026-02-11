@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @ToString
-public class BoardPostReq {
-    private long id; //방금 insert한 row의 pk값을 담을 공간 할당
+public class BoardPostPutReq {
+    private long id; //insert한 row의 pk값을 담을 공간 할당
     private String title;
     private String contents;
     private long userId;

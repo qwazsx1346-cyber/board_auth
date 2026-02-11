@@ -1,5 +1,6 @@
 package com.green.boardauth.application.user;
 
+import com.green.boardauth.application.board.BoardService;
 import com.green.boardauth.application.user.model.UserSignInReq;
 import com.green.boardauth.application.user.model.UserSignInRes;
 import com.green.boardauth.application.user.model.UserSignUpReq;
@@ -9,10 +10,7 @@ import com.green.boardauth.configuration.security.JwtTokenManager;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -31,12 +29,12 @@ public class UserController {
 
 
     @PostMapping("/signin")
-    public ResultResponse<?> singIn(HttpServletResponse res, @RequestBody UserSignInReq req) {
+    public ResultResponse<?> signIn(HttpServletResponse res, @RequestBody UserSignInReq req) {
         log.info("req: {} ", req);
         UserSignInRes userSignInRes = userService.signIn(req);
         //보안 쿠키 처리
         if(userSignInRes != null) {
-            JwtUser jwtUser = new JwtUser( userSignInRes.getSingedUserId() );
+            JwtUser jwtUser = new JwtUser( userSignInRes.getSignedUserId() );
             jwtTokenManager.issue(res, jwtUser);
         }
 

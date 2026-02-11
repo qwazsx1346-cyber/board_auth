@@ -38,7 +38,7 @@ public class UserService {
 //        String refreshToken = jwtTokenProvider.generateRefreshToken(jwtUser);
 
         return UserSignInRes.builder() //class명.메소드()는 static메소드이다.
-                            .singedUserId( res.getId() )
+                            .signedUserId( res.getId() )
                             .nm( res.getNm() )
                             .build();
     }

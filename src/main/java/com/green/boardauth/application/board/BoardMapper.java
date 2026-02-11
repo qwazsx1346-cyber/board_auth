@@ -7,8 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    int save(BoardPostReq req);
+    int save(BoardPostPutReq req);
     List<BoardGetRes> findAll(BoardGetReq req);
     int findMaxPage(BoardGetMaxPageReq req);
-    BoardGetOneRes boardDetail(int id);
+    BoardGetOneRes boardDetail(long id);
+    int modify(BoardPostPutReq req);
+    int delList(BoardDelReq req);
+
 }

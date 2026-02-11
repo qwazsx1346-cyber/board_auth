@@ -13,8 +13,9 @@ import java.util.List;
 public class BoardService {
     private final BoardMapper boardMapper;
 
-    public int postBoard(BoardPostReq req) {
-        return boardMapper.save(req);
+    public long postBoard(BoardPostPutReq req) {
+        boardMapper.save(req);
+        return req.getId();
     }
 
     public List<BoardGetRes> getBoardList(BoardGetReq req) {
@@ -25,7 +26,15 @@ public class BoardService {
         return boardMapper.findMaxPage(req);
     }
 
-    public BoardGetOneRes getBoardDetail(int id) {
+    public BoardGetOneRes getBoardDetail(long id) {
         return boardMapper.boardDetail(id);
+    }
+
+    public void putBoard(BoardPostPutReq req) {
+        boardMapper.modify(req);
+    }
+
+    public int delList(BoardDelReq req) {
+        return boardMapper.delList(req);
     }
 }
