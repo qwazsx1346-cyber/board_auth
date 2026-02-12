@@ -65,4 +65,11 @@ public class BoardController {
         int result = boardService.delList(req);
         return new ResultResponse<>( result == 1 ? "삭제 성공" : "삭제 권한이 없습니다.", result );
     }
+
+    @GetMapping("/related_search")
+    public ResultResponse<?> searchText(@RequestParam( name = "search_text") String text) {
+        List<String> result = boardService.searchText(text);
+        log.info("result: {}", result);
+        return new ResultResponse<>("검색결과", result);
+    }
 }

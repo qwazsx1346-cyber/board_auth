@@ -57,4 +57,11 @@
         WHERE id = #{id}
         AND user_id = #{signedUserId} <!-- 얘가 있어야 나만 삭제할 수 있다. 얘가없으면 로그인만 하면 남의 게시물을 다 삭제할 수 있다.-->
     </delete>
+
+    <select id="searchText">
+        SELECT title
+        FROM board
+        WHERE title LIKE concat(#{searchText}, '%')
+        LIMIT 10
+    </select>
 </mapper>

@@ -37,4 +37,8 @@ public class BoardService {
     public int delList(BoardDelReq req) {
         return boardMapper.delList(req);
     }
+
+    public List<String> searchText(String text) {
+        return boardMapper.searchText(text);
+    }
 }
